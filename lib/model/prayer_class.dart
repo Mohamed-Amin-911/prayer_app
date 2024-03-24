@@ -1,15 +1,6 @@
 class Prayer {
-  final String fajrTime;
-  final String duhuhrTime;
-  final String asrTime;
-  final String maghribTime;
-  final String ishaTime;
+  final String title;
+  final String time;
 
-  Prayer({
-    required this.fajrTime,
-    required this.duhuhrTime,
-    required this.asrTime,
-    required this.maghribTime,
-    required this.ishaTime,
-  });
+  Prayer({required this.title, required this.time});
 }
