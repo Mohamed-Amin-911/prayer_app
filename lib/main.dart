@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prayer_app/provider/login_provider.dart';
+import 'package:prayer_app/provider/prayer_provider.dart';
 import 'package:prayer_app/view/screens/base_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => LoginProvider(),
-        )
+        ),
+        ChangeNotifierProvider(create: (context) => PrayerProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
