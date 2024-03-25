@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:prayer_app/config/size_config.dart';
 import 'package:prayer_app/constants/text_style.dart';
 import 'package:prayer_app/model/shared_prefs_class.dart';
-import 'package:prayer_app/model/user_secure_storage_class.dart';
 import 'package:prayer_app/provider/prayer_provider.dart';
 import 'package:prayer_app/view/screens/sign_up_screen.dart';
 import 'package:prayer_app/view/widgets/prayer_card.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class MainScreen extends StatefulWidget {
@@ -25,13 +22,6 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     Sizeconfig().init(context);
-    final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-    Future<double> _getProgress() async {
-      final SharedPreferences prefs = await _prefs;
-      final double progress = prefs.getDouble('decimal')!;
-
-      return progress;
-    }
 
     return Scaffold(
       body: Column(
@@ -78,32 +68,24 @@ class _MainScreenState extends State<MainScreen> {
           SizedBox(height: 19 * Sizeconfig.verticalBlock),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 36),
-              child: FutureBuilder(
-                future: SecureStorage.readData("Progress"),
-                builder: (context, snapshot) {
-                  return Text(
-                    "Completion : ${snapshot.data == "1" ? "0" : snapshot.data}%",
-                    style: appStyle(
-                        fw: FontWeight.w600, size: 16, color: Colors.black),
-                  );
-                },
+              child: Text(
+                "Completion : ${(Provider.of<PrayerProvider>(context).completion ?? 0) < 1 / 6 ? 0 : ((Provider.of<PrayerProvider>(context).completion ?? 0) * 100).ceil()}%",
+                style: appStyle(
+                    fw: FontWeight.w600, size: 16, color: Colors.black),
               )),
           SizedBox(height: 19 * Sizeconfig.verticalBlock),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 36),
-              child: FutureBuilder(
-                future: SecureStorage.readData("ProgresSlider"),
-                builder: (context, snapshot) {
-                  return LinearProgressIndicator(
-                    value: double.parse("${snapshot.data}"),
-                  );
-                },
+              child: LinearProgressIndicator(
+                value: (Provider.of<PrayerProvider>(context).completion ?? 0) <
+                        1 / 6
+                    ? 0
+                    : (Provider.of<PrayerProvider>(context).completion ?? 0),
               )),
           SizedBox(height: 25 * Sizeconfig.verticalBlock),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 36),
-            child: Flexible(
-                child: FutureBuilder(
+            child: FutureBuilder(
               future: Provider.of<PrayerProvider>(context).getPrayers(),
               builder: (context, snapshot) {
                 return Column(
@@ -171,7 +153,7 @@ class _MainScreenState extends State<MainScreen> {
                   ],
                 );
               },
-            )),
+            ),
           )
         ],
       ),

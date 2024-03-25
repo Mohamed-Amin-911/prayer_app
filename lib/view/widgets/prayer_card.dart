@@ -23,6 +23,17 @@ class PrayerCard extends StatefulWidget {
 
 class _PrayerCardState extends State<PrayerCard> {
   @override
+  void initState() {
+    super.initState();
+    setProgress();
+  }
+
+  setProgress() async {
+    Provider.of<PrayerProvider>(context, listen: false).completion =
+        await SharedPrefs.getCompSharedPrefs("progress");
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
@@ -72,33 +83,25 @@ class _PrayerCardState extends State<PrayerCard> {
                               case 0:
                                 if (snapshot.data == false) {
                                   setState(() {
-                                    Provider.of<PrayerProvider>(context,
-                                            listen: false)
-                                        .setCompletion(1 / 6);
                                     SharedPrefs.setBoolSharedPrefs("1", true);
+                                    SharedPrefs.setCompSharedPrefs(
+                                        "p", (snapshott.data ?? 0) - (1 / 6));
                                   });
                                 } else {
                                   setState(() {
-                                    Provider.of<PrayerProvider>(context,
-                                            listen: false)
-                                        .setCompletion(-1 / 6);
                                     SharedPrefs.setBoolSharedPrefs("1", false);
+                                    SharedPrefs.setCompSharedPrefs(
+                                        "p", (snapshott.data ?? 0) + (1 / 6));
                                   });
                                 }
 
                               case 1:
                                 if (snapshot.data == false) {
                                   setState(() {
-                                    Provider.of<PrayerProvider>(context,
-                                            listen: false)
-                                        .setCompletion(1 / 6);
                                     SharedPrefs.setBoolSharedPrefs("2", true);
                                   });
                                 } else {
                                   setState(() {
-                                    Provider.of<PrayerProvider>(context,
-                                            listen: false)
-                                        .setCompletion(-1 / 6);
                                     SharedPrefs.setBoolSharedPrefs("2", false);
                                   });
                                 }
@@ -106,16 +109,10 @@ class _PrayerCardState extends State<PrayerCard> {
                               case 2:
                                 if (snapshot.data == false) {
                                   setState(() {
-                                    Provider.of<PrayerProvider>(context,
-                                            listen: false)
-                                        .setCompletion(1 / 6);
                                     SharedPrefs.setBoolSharedPrefs("3", true);
                                   });
                                 } else {
                                   setState(() {
-                                    Provider.of<PrayerProvider>(context,
-                                            listen: false)
-                                        .setCompletion(-1 / 6);
                                     SharedPrefs.setBoolSharedPrefs("3", false);
                                   });
                                 }
@@ -123,16 +120,10 @@ class _PrayerCardState extends State<PrayerCard> {
                               case 3:
                                 if (snapshot.data == false) {
                                   setState(() {
-                                    Provider.of<PrayerProvider>(context,
-                                            listen: false)
-                                        .setCompletion(1 / 6);
                                     SharedPrefs.setBoolSharedPrefs("4", true);
                                   });
                                 } else {
                                   setState(() {
-                                    Provider.of<PrayerProvider>(context,
-                                            listen: false)
-                                        .setCompletion(-1 / 6);
                                     SharedPrefs.setBoolSharedPrefs("4", false);
                                   });
                                 }
@@ -140,16 +131,10 @@ class _PrayerCardState extends State<PrayerCard> {
                               case 4:
                                 if (snapshot.data == false) {
                                   setState(() {
-                                    Provider.of<PrayerProvider>(context,
-                                            listen: false)
-                                        .setCompletion(1 / 6);
                                     SharedPrefs.setBoolSharedPrefs("5", true);
                                   });
                                 } else {
                                   setState(() {
-                                    Provider.of<PrayerProvider>(context,
-                                            listen: false)
-                                        .setCompletion(-1 / 6);
                                     SharedPrefs.setBoolSharedPrefs("5", false);
                                   });
                                 }
@@ -157,23 +142,34 @@ class _PrayerCardState extends State<PrayerCard> {
                               case 5:
                                 if (snapshot.data == false) {
                                   setState(() {
-                                    Provider.of<PrayerProvider>(context,
-                                            listen: false)
-                                        .setCompletion(1 / 6);
                                     SharedPrefs.setBoolSharedPrefs("6", true);
                                   });
                                 } else {
                                   setState(() {
-                                    Provider.of<PrayerProvider>(context,
-                                            listen: false)
-                                        .setCompletion(-1 / 6);
                                     SharedPrefs.setBoolSharedPrefs("6", false);
                                   });
                                 }
                             }
+                            if (snapshot.data == false) {
+                              setState(() {
+                                Provider.of<PrayerProvider>(context,
+                                        listen: false)
+                                    .setCompletion(1 / 6);
+                              });
+                            } else if (snapshot.data == true) {
+                              setState(() {
+                                Provider.of<PrayerProvider>(context,
+                                        listen: false)
+                                    .setCompletion(-1 / 6);
+                              });
+                            }
                             print(snapshot.data);
                             print(widget.index);
-                            print((-snapshott.data!) * (100));
+                            print((Provider.of<PrayerProvider>(context,
+                                            listen: false)
+                                        .completion ??
+                                    0) *
+                                100);
                           },
                           icon: snapshot.data!
                               ? const Icon(

@@ -14,6 +14,7 @@ class BaseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: FutureBuilder(
             future: _isLoggedIn(),
             builder: (context, snapshot) {
