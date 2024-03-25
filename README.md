@@ -1,16 +1,2 @@
 # prayer_app
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Screenshot_1711375404](https://github.com/Mohamed-Amin-911/prayer_app/assets/141561179/ea888eeb-f8d5-4061-a9a2-0556c9eaf7ae)![Screenshot_1711375380](https://github.com/Mohamed-Amin-911/prayer_app/assets/141561179/f7292144-471b-46c6-8ab2-cfc143de2af5)![Screenshot_1711375366](https://github.com/Mohamed-Amin-911/prayer_app/assets/141561179/ff22c7be-d472-47db-8f9a-2b2da95192d0)
