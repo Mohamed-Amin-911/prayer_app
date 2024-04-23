@@ -5,6 +5,7 @@ import 'package:prayer_app/constants/text_style.dart';
 import 'package:prayer_app/model/user_secure_storage_class.dart';
 import 'package:prayer_app/provider/login_provider.dart';
 import 'package:prayer_app/view/screens/main_screen.dart';
+import 'package:prayer_app/view/screens/sign_up_screen.dart';
 import 'package:provider/provider.dart';
 
 const storage = FlutterSecureStorage();
@@ -144,6 +145,32 @@ class _LogInScreenState extends State<LogInScreen> {
                         "LOGIN",
                         style: appStyle(
                             fw: FontWeight.w400, size: 14, color: Colors.white),
+                      ),
+                    )),
+                SizedBox(height: 35 * Sizeconfig.verticalBlock),
+                SizedBox(
+                    height: 48,
+                    width: 343,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignUpScreen(),
+                            ));
+                      },
+                      style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                  color: Color(0xff52BF95), width: 2),
+                              borderRadius: BorderRadius.circular(25)),
+                          backgroundColor: Colors.white),
+                      child: Text(
+                        "SIGNUP",
+                        style: appStyle(
+                            fw: FontWeight.w400,
+                            size: 14,
+                            color: const Color(0xff52BF95)),
                       ),
                     ))
               ],
